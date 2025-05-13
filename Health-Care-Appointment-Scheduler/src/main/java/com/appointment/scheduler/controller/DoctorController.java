@@ -47,5 +47,10 @@ public class DoctorController {
         String msg = "Available Date Updated Successfully !!";
         return new ResponseEntity<>(msg,HttpStatus.OK);
     }
+    @GetMapping(value = "/getDoctorBySpecialization/{specialization}")
+    public ResponseEntity<List<Doctor>> getDoctorsBySpecialization(@PathVariable String specialization) throws AppointmentSchedulerException {
+        List<Doctor> doctorList = doctorService.getDoctorsBySpecialization(specialization);
+        return new ResponseEntity<>(doctorList,HttpStatus.OK);
+    }
 
 }
