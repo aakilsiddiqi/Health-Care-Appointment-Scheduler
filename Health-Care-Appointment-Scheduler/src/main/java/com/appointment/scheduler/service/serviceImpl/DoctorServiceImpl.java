@@ -81,8 +81,7 @@ public class DoctorServiceImpl implements DoctorService {
         if (doctorDTO.getAvailableDate().isBefore(today)) {
             throw new AppointmentSchedulerException("Please enter present or future date !!");
         }
-        boolean alreadyExists = doctorRepo.existsByDoctorIdAndAvailableDate(doctorId, doctorDTO.getAvailableDate());
-        if (alreadyExists) {
+        if (doctorRepo.existsByDoctorIdAndAvailableDate(doctorId, doctorDTO.getAvailableDate())) {
             throw new AppointmentSchedulerException("Same Date is already Present, No update required !! ");
         }
         Doctor doctor = doctorRepo.findById(doctorId).orElseThrow(() -> new AppointmentSchedulerException("Doctor Id Not Exists for this !!!"));
